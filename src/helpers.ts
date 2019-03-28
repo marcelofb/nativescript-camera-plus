@@ -79,14 +79,17 @@ export function assetFromPath(path, width, height, keepAspectRatio): ImageAsset 
 export function getOptimalPreviewSize(
   sizes: java.util.List<android.hardware.Camera.Size>,
   width: number,
-  height: number
+  height: number,
+  selfie: boolean
 ): android.hardware.Camera.Size {
+  const ASPECT_TOLERANCE = 0.1;
   const targetRatio = height / width;
   CLog(`targetRatio = ${targetRatio}`);
 
   if (sizes === null) return null;
 
   let optimalSize = null as android.hardware.Camera.Size;
+  let minDiff = Number.MAX_SAFE_INTEGER;
 
   const targetHeight = height;
   CLog(`targetHeight = ${targetHeight}`);
@@ -94,6 +97,15 @@ export function getOptimalPreviewSize(
   for (let i = 0; i < sizes.size(); i++) {
     const element = sizes.get(i) as android.hardware.Camera.Size;
     CLog(`size.width = ${element.width}, size.height = ${element.height}`);
+    if (selfie) {
+      const ratio = element.width / element.height;
+      CLog(`ratio = ${ratio}`);
+      if (Math.abs(ratio - targetRatio) > ASPECT_TOLERANCE) continue;
+      if (Math.abs(element.height - targetHeight) < minDiff) {
+        optimalSize = element;
+        minDiff = Math.abs(element.height - targetHeight);
+      }
+    } else {
     if (element.width <= width && element.height <= height) {
       if (optimalSize == null) {
         optimalSize = element;
@@ -107,6 +119,19 @@ export function getOptimalPreviewSize(
       }
     }
   }
+}
+if (optimalSize === null) {
+  // minDiff = Double.MAX_VALUE;
+  minDiff = Number.MAX_SAFE_INTEGER;
+  for (var i = 0; i < sizes.size(); i++) {
+    const element = sizes.get(i) as android.hardware.Camera.Size;
+    CLog(`size.width = ${element.width}, size.height = ${element.height}`);
+    if (Math.abs(element.height - targetHeight) < minDiff) {
+      optimalSize = element;
+      minDiff = Math.abs(element.height - targetHeight);
+    }
+  }
+}
   CLog(
     `optimalSize = ${optimalSize}, optimalSize.width = ${optimalSize.width}, optimalSize.height = ${optimalSize.height}`
   );

@@ -73,6 +73,8 @@ export class CameraPlus extends CameraPlusBase {
   @GetSetProperty()
   public autoFocus: boolean = true;
   @GetSetProperty()
+  public selfie: boolean = false;
+  @GetSetProperty()
   public flashOnIcon: string = 'ic_flash_on_white';
   @GetSetProperty()
   public flashOffIcon: string = 'ic_flash_off_white';
@@ -1313,7 +1315,7 @@ export class CameraPlus extends CameraPlusBase {
     const mSupportedPreviewSizes = params.getSupportedPreviewSizes();
     const layoutWidth = this._nativeView.getWidth();
     const layoutHeight = this._nativeView.getHeight();
-    const mPreviewSize = CamHelpers.getOptimalPreviewSize(mSupportedPreviewSizes, layoutWidth, layoutHeight);
+    const mPreviewSize = CamHelpers.getOptimalPreviewSize(mSupportedPreviewSizes, layoutWidth, layoutHeight, this.selfie);
     CLog(`mPreviewSize = ${mPreviewSize}`);
     if (mPreviewSize) {
       if (this.isVideoEnabled()) {

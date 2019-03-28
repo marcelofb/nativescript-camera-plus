@@ -1,6 +1,6 @@
 {
-  "name": "@nstudio/nativescript-camera-plus",
-  "version": "2.1.3",
+  "name": "nativescript-camera-plus-fixed-distorted",
+  "version": "1.0.7",
   "description": "An advanced, embeddable camera for NativeScript.",
   "main": "camera-plus",
   "typings": "index.d.ts",
@@ -17,7 +17,7 @@
     "build": "npm i && tsc",
     "link": "npm i && cd ../demo && npm i && cd ../src && npm run plugin.link",
     "demo.reset": "cd ../demo && rimraf platforms",
-    "plugin.link": "npm link && cd ../demo && npm link @nstudio/nativescript-camera-plus && cd ../src",
+    "plugin.link": "npm link && cd ../demo && npm link nativescript-camera-plus-fixed-distorted && cd ../src",
     "plugin.tscwatch": "npm run tsc -- -w",
     "nuke": "rm -rf node_modules && cd ../demo && rm -rf hooks node_modules platforms && cd ../demo-ng && rm -rf hooks node_modules platforms",
     "demo.ios": "npm run preparedemo && cd ../demo && tns run ios --emulator --syncAllFiles",
@@ -31,8 +31,8 @@
     "test.ios": "cd ../demo && tns test ios --emulator",
     "test.ios.device": "cd ../demo && tns test ios",
     "test.android": "cd ../demo && tns test android",
-    "preparedemo": "npm run build && cd ../demo && tns plugin remove @nstudio/nativescript-camera-plus && tns plugin add ../src",
-    "preparedemong": "npm run build && cd ../demo-ng && tns plugin remove @nstudio/nativescript-camera-plus && tns plugin add ../src",
+    "preparedemo": "npm run build && cd ../demo && tns plugin remove nativescript-camera-plus-fixed-distorted && tns plugin add ../src",
+    "preparedemong": "npm run build && cd ../demo-ng && tns plugin remove nativescript-camera-plus-fixed-distorted && tns plugin add ../src",
     "setup": "npm i && cd ../demo && npm i && cd .. && npm run build && cd ../demo && tns plugin add .. && cd ..",
     "postclone": "npm i && node scripts/postclone.js"
   },
@@ -44,7 +44,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/nstudio/nativescript-camera-plus.git"
+    "url": "https://github.com/marcelofb/nativescript-camera-plus-fixed-distorted.git"
   },
   "keywords": [
     "NativeScript",
@@ -77,10 +77,10 @@
     }
   ],
   "bugs": {
-    "url": "https://github.com/nstudio/nativescript-camera-plus/issues"
+    "url": "https://github.com/marcelofb/nativescript-camera-plus-fixed-distorted/issues"
   },
   "license": "MIT",
-  "homepage": "https://github.com/nstudio/nativescript-camera-plus",
+  "homepage": "https://github.com/marcelofb/nativescript-camera-plus-fixed-distorted",
   "readmeFilename": "README.md",
   "devDependencies": {
     "husky": "^1.1.2",

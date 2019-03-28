@@ -137,6 +137,8 @@ export declare class CameraPlus extends View {
    */
   autoFocus: boolean;
 
+  selfie: boolean;
+
   /**
    * Toggles the device camera (front/back).
    */

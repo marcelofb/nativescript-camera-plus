@@ -180,6 +180,8 @@ export abstract class CameraPlusBase extends View implements CameraPlusDefinitio
   @GetSetProperty()
   public autoFocus: boolean = true;
 
+  @GetSetProperty() public selfie: boolean = false;
+
   /**
    * *iOS ONLY* - Enable/disable double tap gesture to switch camera. (enabled)
    */
